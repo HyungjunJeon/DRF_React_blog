@@ -14,4 +14,4 @@ class UserViewSet(viewsets.ModelViewSet):
 class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    authentication_classes = (TokenAuthentication)
+    authentication_classes = (TokenAuthentication,)
