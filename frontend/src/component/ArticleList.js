@@ -1,10 +1,26 @@
 import React from "react"
 
-const ArticleList = () => {
+const ArticleList = (props) => {
   return (
     <div>
-      <h1>List of Articles</h1>
-      <p>Hi there</p>
+      {props.articles &&
+        props.articles.map((article) => {
+          return (
+            <div key={article.id}>
+              <h1>{article.title}</h1>
+              <p>{article.description}</p>
+              <div className="row">
+                <div className="col-md-1">
+                  <button className="btn btn-primary">Update</button>
+                </div>
+                <div className="col-md-1">
+                  <button className="btn btn-danger">Delete</button>
+                </div>
+              </div>
+              <hr className="postline" />
+            </div>
+          )
+        })}
     </div>
   )
 }
