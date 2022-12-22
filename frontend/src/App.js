@@ -2,6 +2,7 @@ import "./App.css"
 import ArticleList from "./component/ArticleList"
 import { useState, useEffect } from "react"
 import "bootstrap/dist/css/bootstrap.css"
+import NavBar from "./component/NavBar"
 
 const App = () => {
   const [articles, setArticles] = useState([])
@@ -21,6 +22,8 @@ const App = () => {
 
   return (
     <div className="App">
+      <NavBar />
+      <br />
       <ArticleList articles={articles} />
     </div>
   )
