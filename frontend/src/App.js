@@ -3,9 +3,11 @@ import ArticleList from "./component/ArticleList"
 import { useState, useEffect } from "react"
 import "bootstrap/dist/css/bootstrap.css"
 import NavBar from "./component/NavBar"
+import Form from "./component/Form"
 
 const App = () => {
   const [articles, setArticles] = useState([])
+  const [editArticle, setEditArticle] = useState("")
 
   useEffect(() => {
     fetch("http://localhost:8000/api/articles/", {
@@ -20,11 +22,22 @@ const App = () => {
       .catch((error) => console.log(error))
   })
 
+  const editBtn = (article) => {
+    setEditArticle(article)
+  }
+
   return (
     <div className="App">
       <NavBar />
       <br />
-      <ArticleList articles={articles} />
+      <div className="row">
+        <div className="col">
+          <button className="btn btn-primary">Create Post</button>
+        </div>
+      </div>
+      <br />
+      <ArticleList articles={articles} editBtn={editBtn} />
+      <Form article={editArticle} />
     </div>
   )
 }

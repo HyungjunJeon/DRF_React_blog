@@ -1,6 +1,9 @@
 import React from "react"
 
 const ArticleList = (props) => {
+  const editBtn = (article) => {
+    props.editBtn(article)
+  }
   return (
     <div>
       {props.articles &&
@@ -11,7 +14,9 @@ const ArticleList = (props) => {
               <p>{article.description}</p>
               <div className="row">
                 <div className="col-md-1">
-                  <button className="btn btn-primary">Update</button>
+                  <button className="btn btn-primary" onClick={() => editBtn(article)}>
+                    Update
+                  </button>
                 </div>
                 <div className="col-md-1">
                   <button className="btn btn-danger">Delete</button>
