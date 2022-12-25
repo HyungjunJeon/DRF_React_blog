@@ -14,6 +14,14 @@ const Form = (props) => {
     APIService.UpdateArticle(props.article.id, { title, description }).then((resp) =>
       props.updatedInformation(resp)
     )
+    setTitle("")
+    setDescription("")
+  }
+
+  const insertArticle = () => {
+    APIService.InsertArticle({ title, description }).then((resp) => props.insertedInformation(resp))
+    setTitle("")
+    setDescription("")
   }
 
   return (
@@ -47,7 +55,9 @@ const Form = (props) => {
                 Update
               </button>
             ) : (
-              <button className="btn btn-primary">Post</button>
+              <button onClick={insertArticle} className="btn btn-primary">
+                Post
+              </button>
             )}
           </div>
         </div>

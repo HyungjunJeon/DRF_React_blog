@@ -26,6 +26,15 @@ const App = () => {
     setEditArticle(article)
   }
 
+  const articleForm = () => {
+    setEditArticle({ title: "", description: "" })
+  }
+
+  const insertedInformation = (article) => {
+    const new_articles = [...articles, article]
+    setArticles(new_articles)
+  }
+
   const updatedInformation = (article) => {
     const new_article = articles.map((myarticle) => {
       if (myarticle.id === article.id) {
@@ -43,12 +52,18 @@ const App = () => {
       <br />
       <div className="row">
         <div className="col">
-          <button className="btn btn-primary">Create Post</button>
+          <button className="btn btn-primary" onClick={articleForm}>
+            Create Post
+          </button>
         </div>
       </div>
       <br />
       <ArticleList articles={articles} editBtn={editBtn} />
-      <Form article={editArticle} updatedInformation={updatedInformation} />
+      <Form
+        article={editArticle}
+        updatedInformation={updatedInformation}
+        insertedInformation={insertedInformation}
+      />
     </div>
   )
 }
