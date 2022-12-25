@@ -35,6 +35,17 @@ const App = () => {
     setArticles(new_articles)
   }
 
+  const deleteBtn = (article) => {
+    const new_article = articles.filter((myarticle) => {
+      if (myarticle.id === article.id) {
+        return false
+      }
+
+      return true
+    })
+    setArticles(new_article)
+  }
+
   const updatedInformation = (article) => {
     const new_article = articles.map((myarticle) => {
       if (myarticle.id === article.id) {
@@ -58,7 +69,7 @@ const App = () => {
         </div>
       </div>
       <br />
-      <ArticleList articles={articles} editBtn={editBtn} />
+      <ArticleList articles={articles} editBtn={editBtn} deleteBtn={deleteBtn} />
       <Form
         article={editArticle}
         updatedInformation={updatedInformation}
