@@ -26,6 +26,17 @@ const App = () => {
     setEditArticle(article)
   }
 
+  const updatedInformation = (article) => {
+    const new_article = articles.map((myarticle) => {
+      if (myarticle.id === article.id) {
+        return article
+      } else {
+        return myarticle
+      }
+    })
+    setArticles(new_article)
+  }
+
   return (
     <div className="App">
       <NavBar />
@@ -37,7 +48,7 @@ const App = () => {
       </div>
       <br />
       <ArticleList articles={articles} editBtn={editBtn} />
-      <Form article={editArticle} />
+      <Form article={editArticle} updatedInformation={updatedInformation} />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import APIService from "./APIService"
 
 const Form = (props) => {
   const [title, setTitle] = useState("")
@@ -9,28 +10,48 @@ const Form = (props) => {
     setDescription(props.article.description)
   }, [props.article])
 
+  const updateArticle = () => {
+    APIService.UpdateArticle(props.article.id, { title, description }).then((resp) =>
+      props.updatedInformation(resp)
+    )
+  }
+
   return (
     <div>
-      <div className="col-md-6">
-        <div className="form-group">
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            value={title}
-            className="form-control"
-            placeholder="Enter Post Title"
-          />
-          <label htmlFor="description">Description</label>
-          <textarea
-            className="form-control"
-            value={description}
-            placeholder="Enter Post Description"
-            cols={10}
-          />
+      {props.article ? (
+        <div>
+          <div className="col-md-7">
+            <div className="col-md-6">
+              <div className="form-group">
+                <label htmlFor="title">Title</label>
+                <input
+                  type="text"
+                  value={title}
+                  className="form-control"
+                  placeholder="Enter Post Title"
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+                <label htmlFor="description">Description</label>
+                <textarea
+                  className="form-control"
+                  value={description}
+                  placeholder="Enter Post Description"
+                  onChange={(e) => setDescription(e.target.value)}
+                  rows={3}
+                />
+              </div>
+            </div>
+            <br />
+            {props.article.id ? (
+              <button onClick={updateArticle} className="btn btn-success">
+                Update
+              </button>
+            ) : (
+              <button className="btn btn-primary">Post</button>
+            )}
+          </div>
         </div>
-      </div>
-      <br />
-      <button className="btn btn-primary">Submit</button>
+      ) : null}
     </div>
   )
 }
