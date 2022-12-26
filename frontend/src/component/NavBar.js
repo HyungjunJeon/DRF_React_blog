@@ -1,6 +1,13 @@
 import React from "react"
+import { useCookies } from "react-cookie"
 
 const NavBar = () => {
+  const [token, setToken, removeToken] = useCookies(["mytoken"])
+
+  const logoutBtn = () => {
+    removeToken(["mytoken"])
+  }
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -22,7 +29,9 @@ const NavBar = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active">Log out</a>
+                <a className="nav-link active" onClick={logoutBtn}>
+                  Log out
+                </a>
               </li>
             </ul>
           </div>

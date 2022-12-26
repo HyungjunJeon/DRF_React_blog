@@ -4,10 +4,14 @@ import { useState, useEffect } from "react"
 import "bootstrap/dist/css/bootstrap.css"
 import NavBar from "./component/NavBar"
 import Form from "./component/Form"
+import { useNavigate } from "react-router-dom"
+import { useCookies } from "react-cookie"
 
 const App = () => {
   const [articles, setArticles] = useState([])
   const [editArticle, setEditArticle] = useState("")
+  const [token, setToken, removeToken] = useCookies(["mytoken"])
+  let navigate = useNavigate()
 
   useEffect(() => {
     fetch("http://localhost:8000/api/articles/", {
@@ -55,6 +59,20 @@ const App = () => {
       }
     })
     setArticles(new_article)
+  }
+
+  useEffect(() => {
+    let user_token = token["mytoken"]
+    console.log("User token is ", user_token)
+    if (String(user_token) === "undefined") {
+      navigate("/")
+    } else {
+      navigate("/articles")
+    }
+  }, [token])
+
+  const logoutBtn = () => {
+    removeToken(["mytoken"])
   }
 
   return (
